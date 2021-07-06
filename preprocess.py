@@ -1,9 +1,15 @@
+import urllib.request
+import zipfile
+url = 'https://gitlab.com/shimorina/webnlg-dataset/-/archive/master/webnlg-dataset-master.zip?path=release_v3.0/en/train'
+urllib.request.urlretrieve(url, 'web.zip')
+with zipfile.ZipFile('web.zip', 'r') as zip_ref:
+    zip_ref.extractall('web')
 import glob
 import os
 import re
 import xml.etree.ElementTree as ET
 import pandas as pd
-files = glob.glob(os.getcwd() + "/path/to/training set/folder/**/*.xml", recursive=True)
+files = glob.glob("/content/web/webnlg-dataset-master-release_v3.0-en-train/release_v3.0/en/train/**/*.xml", recursive=True)
 triple_re=re.compile('(\d)triples')
 data_dct={}
 for file in files:
